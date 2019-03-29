@@ -144,8 +144,7 @@ public class LoginActivity extends AppCompatActivity {
             popupConstraintSet.applyTo(mConstraintLayout);
         }, 500);
     }
-
-
+    
     private void showCredentialsBox(int upperViewId) {
         if (upperViewId != R.id.loginButton && upperViewId != R.id.registerButton) return;
         //We need the upper view Id to know if we are logging in or registering
