@@ -99,27 +99,33 @@ public class LoginActivity extends AppCompatActivity {
 
     private void loginUser() {
         //FIXME: user needs to login with the email, although the UI uses the username.
-        mFirebaseAuth.signInWithEmailAndPassword(mEmailEditText.getText().toString(), mUserPassword.getText().toString()).addOnCompleteListener(this, task -> {
-            if (task.isSuccessful()) {
-                Intent mapsIntent = new Intent(this, MapsActivity.class);
-                startActivity(mapsIntent);
-            } else {
-                showInvalidLoginPopup();
-            }
-        });
+        if (!mEmailEditText.getText().toString().isEmpty() && !mUserPassword.getText().toString().isEmpty()){
+            mFirebaseAuth.signInWithEmailAndPassword(mEmailEditText.getText().toString(), mUserPassword.getText().toString()).addOnCompleteListener(this, task -> {
+                if (task.isSuccessful()) {
+                    Intent mapsIntent = new Intent(this, MapsActivity.class);
+                    startActivity(mapsIntent);
+                } else {
+                    showInvalidLoginPopup();
+                }
+            });
+
+        }
     }
 
     private void registerUser() {
         //FIXME: What happens if the required fields are empty?
-        mFirebaseAuth.createUserWithEmailAndPassword(mEmailEditText.getText().toString(), mUserPassword.getText().toString()).addOnCompleteListener(this, task -> {
-            if (task.isSuccessful()) {
-                Intent mapsIntent = new Intent(this, MapsActivity.class);
-                startActivity(mapsIntent);
-            } else {
-                Log.d("ERROR", Objects.requireNonNull(task.getException()).getMessage());
-                showInvalidLoginPopup();
-            }
-        });
+        if(!mEmailEditText.getText().toString().isEmpty() && !mUserPassword.getText().toString().isEmpty()){
+            mFirebaseAuth.createUserWithEmailAndPassword(mEmailEditText.getText().toString(), mUserPassword.getText().toString()).addOnCompleteListener(this, task -> {
+                if (task.isSuccessful()) {
+                    Intent mapsIntent = new Intent(this, MapsActivity.class);
+                    startActivity(mapsIntent);
+                } else {
+                    Log.d("ERROR", Objects.requireNonNull(task.getException()).getMessage());
+                    showInvalidLoginPopup();
+                }
+            });
+
+        }
     }
 
     private void showInvalidLoginPopup() {
@@ -139,10 +145,6 @@ public class LoginActivity extends AppCompatActivity {
         }, 500);
     }
 
-    private boolean isLoginValid() {
-        //TODO use firebase?
-        return mEmailEditText.getText().toString().equals("Luis") && mUserPassword.getText().toString().equals("Pass");
-    }
 
     private void showCredentialsBox(int upperViewId) {
         if (upperViewId != R.id.loginButton && upperViewId != R.id.registerButton) return;
