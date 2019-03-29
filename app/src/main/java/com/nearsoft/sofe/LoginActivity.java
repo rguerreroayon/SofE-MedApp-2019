@@ -121,7 +121,7 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(mapsIntent);
                 } else {
                     Log.d("ERROR", Objects.requireNonNull(task.getException()).getMessage());
-                    showInvalidLoginPopup();
+                    showInvalidSignUpPopup();
                 }
             });
 
@@ -142,9 +142,25 @@ public class LoginActivity extends AppCompatActivity {
             int bottomMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics());
             popupConstraintSet.connect(R.id.invalidLoginPopup, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.TOP, bottomMargin);
             popupConstraintSet.applyTo(mConstraintLayout);
-        }, 500);
+        }, 5000);
     }
-    
+    private void showInvalidSignUpPopup() {
+        //FIXME: the message is showing invalid login also for registration but should be a different message.
+        ConstraintSet popupConstraintSet = new ConstraintSet();
+        popupConstraintSet.clone(mConstraintLayout);
+        popupConstraintSet.clear(R.id.invalidSignUpPopup, ConstraintSet.BOTTOM);
+        popupConstraintSet.connect(R.id.invalidSignUpPopup, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP);
+        TransitionManager.beginDelayedTransition(mConstraintLayout);
+        popupConstraintSet.applyTo(mConstraintLayout);
+        final Handler handler = new Handler();
+        handler.postDelayed(() -> {
+            popupConstraintSet.clear(R.id.invalidSignUpPopup, ConstraintSet.TOP);
+            int bottomMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics());
+            popupConstraintSet.connect(R.id.invalidSignUpPopup, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.TOP, bottomMargin);
+            popupConstraintSet.applyTo(mConstraintLayout);
+        }, 5000);
+    }
+
     private void showCredentialsBox(int upperViewId) {
         if (upperViewId != R.id.loginButton && upperViewId != R.id.registerButton) return;
         //We need the upper view Id to know if we are logging in or registering
@@ -162,7 +178,7 @@ public class LoginActivity extends AppCompatActivity {
             mEmailTextView.setText("Correo");
         } else {
             mUserLinearLayout.setVisibility(View.GONE);
-            mEmailTextView.setText("Usuario o correo");
+            mEmailTextView.setText("Correo");
         }
         cardConstraints.setVisibility(R.id.credentialsCardView, View.VISIBLE);
         cardConstraints.applyTo(mConstraintLayout);
