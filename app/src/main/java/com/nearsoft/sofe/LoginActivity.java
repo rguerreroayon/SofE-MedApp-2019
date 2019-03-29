@@ -139,10 +139,7 @@ public class LoginActivity extends AppCompatActivity {
         }, 500);
     }
 
-    private boolean isLoginValid() {
-        //TODO use firebase?
-        return mEmailEditText.getText().toString().equals("Luis") && mUserPassword.getText().toString().equals("Pass");
-    }
+
 
     private void showCredentialsBox(int upperViewId) {
         if (upperViewId != R.id.loginButton && upperViewId != R.id.registerButton) return;

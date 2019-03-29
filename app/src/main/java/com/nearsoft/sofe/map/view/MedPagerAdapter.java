@@ -15,9 +15,9 @@ public class MedPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int i) {
         switch (i) {
             case 0:
-                return MapFragment.newInstance();
-            case 1:
                 return ServicesFragment.newInstance();
+            case 1:
+                return MapFragment.newInstance();
             default:
                 return null;
         }
