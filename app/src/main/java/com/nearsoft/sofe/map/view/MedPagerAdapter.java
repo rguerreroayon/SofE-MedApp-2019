@@ -28,9 +28,9 @@ public class MedPagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position) {
             case 0:
-                return "Inicio";
-            case 1:
                 return "Citas";
+            case 1:
+                return "Inicio";
             default:
                 return null;
         }
