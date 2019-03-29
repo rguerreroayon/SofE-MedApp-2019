@@ -147,7 +147,8 @@
         app:fabSize="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_add"
-        tools:srcCompat="@drawable/phone_white" />
+        app:srcCompat="@drawable/botonemergencia"
+        tools:srcCompat="@drawable/phone_white"
+        android:textAlignment="center"/>
 
 </android.support.constraint.ConstraintLayout>
